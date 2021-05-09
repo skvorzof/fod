@@ -56,13 +56,13 @@ const check = (num) => {
     case 1: //Банкрот
       loadClip(clips[2]);
       playClip();
-      curUnit.counter(num, 1);
+      curUnit.counter(num);
       nextUnit();
       break;
     case 2: //x2
       loadClip(clips[4]);
       playClip();
-      curUnit.counter(num, 2);
+      curUnit.counter(num);
       break;
     case 3: // Приз
       loadClip(clips[3]);
