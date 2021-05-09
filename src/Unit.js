@@ -27,10 +27,18 @@ export class Unit {
     name.textContent = this.name;
     group.appendChild(name);
   }
-  counter(res, opt) {
+  counter(res) {
     const unit = document.querySelector('#unit' + this.id);
-    if (opt === 1) this.count = 0;
-    if (opt === 2) this.count * 2;
+    //Банкрот
+    if (res === 1) {
+      res = 0;
+      this.count = 0;
+    }
+    //x2
+    if (res === 2) {
+      res = 0;
+      this.count *= 2;
+    }
     unit.textContent = this.count += res;
   }
 }
