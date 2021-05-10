@@ -51,12 +51,14 @@ const check = (num) => {
     case 0:
       loadClip(clips[1]);
       playClip();
+      curUnit.removeActive();
       nextUnit();
       break;
     case 1: //Банкрот
       loadClip(clips[2]);
       playClip();
       curUnit.counter(num);
+      curUnit.removeActive();
       nextUnit();
       break;
     case 2: //x2
@@ -74,8 +76,8 @@ const check = (num) => {
   }
 };
 
+let oneClick = true; // Запрет на повторный запуск барабана
 let num = 0;
-let res = 0;
 const anim = timer({
   from: 0,
   to: 360 * 3 + 120,
@@ -83,10 +85,12 @@ const anim = timer({
   elem: div,
   callback: function () {
     check(num);
+    oneClick = true;
   },
 });
 
-div.addEventListener('mousedown', () => {
+function rotateReel() {
+  curUnit.setActive();
   loadClip(clips[0]);
   playClip();
   const n = (15 * Math.random()) | 0;
@@ -117,4 +121,11 @@ div.addEventListener('mousedown', () => {
     900,
   ][n];
   anim.play(360 * 3 + n * 15); //угол поворота
+}
+
+div.addEventListener('click', () => {
+  if (oneClick) {
+    oneClick = false;
+    rotateReel();
+  }
 });

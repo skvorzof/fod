@@ -1,5 +1,6 @@
 export class Unit {
   constructor(data) {
+    this.active = false;
     this.id = data.id;
     this.name = data.name;
     this.ava = data.ava;
@@ -10,6 +11,10 @@ export class Unit {
     const group = document.createElement('div');
     group.className = 'group';
     right.appendChild(group);
+
+    if (this.active) {
+      group.classList.add('active');
+    }
 
     const res = document.createElement('div');
     res.className = 'res';
@@ -27,18 +32,43 @@ export class Unit {
     name.textContent = this.name;
     group.appendChild(name);
   }
-  counter(res) {
+
+  counter(num) {
     const unit = document.querySelector('#unit' + this.id);
+    if (num === 0) {
+      this.cur = false;
+    }
+
     //Банкрот
-    if (res === 1) {
-      res = 0;
+    if (num === 1) {
+      num = 0;
       this.count = 0;
+      this.cur = false;
     }
     //x2
-    if (res === 2) {
-      res = 0;
+    if (num === 2) {
+      num = 0;
       this.count *= 2;
     }
-    unit.textContent = this.count += res;
+    unit.textContent = this.count += num;
+  }
+
+  toogleActive(status) {
+    const unit = document.querySelector('#unit' + this.id);
+
+    this.active = status;
+    if (this.active) {
+      unit.classList.add('active');
+    } else {
+      unit.classList.remove('active');
+    }
+  }
+
+  setActive() {
+    this.toogleActive(true);
+  }
+
+  removeActive() {
+    this.toogleActive(false);
   }
 }

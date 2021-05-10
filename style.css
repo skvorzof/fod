@@ -44,6 +44,16 @@ body {
   font-size: 40px;
   font-weight: bold;
 }
+.res.active {
+  position: relative;
+}
+.res.active::after {
+  position: absolute;
+  content: '🔻';
+  top: -30px;
+  left: 30%;
+  font-size: 32px;
+}
 .ava {
   font-size: 80px;
 }
