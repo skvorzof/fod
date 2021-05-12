@@ -19,26 +19,44 @@ body {
 }
 #ring {
   background-image: url(./src/media/ring.png);
-  width: 700px;
-  height: 700px;
+  width: 500px;
+  height: 500px;
 }
 .box::after {
   position: absolute;
   content: '👆';
   font-size: 50px;
-  left: 330px;
+  left: 230px;
   bottom: -40px;
 }
 .left {
   flex: 2;
+  align-self: flex-end;
 }
 .right {
   flex: 1;
+  justify-content: space-around;
+  color: #fff;
+}
+.units,
+.word {
   text-align: center;
   display: flex;
   justify-content: space-around;
-  align-self: flex-end;
-  color: #fff;
+}
+.word {
+  flex-direction: column;
+}
+ul {
+  list-style: none;
+  display: flex;
+}
+li {
+  font-size: 40px;
+  margin: 10px;
+  background: #3f44ff;
+  border: 1px solid white;
+  width: 37px;
 }
 .res {
   font-size: 40px;
@@ -59,4 +77,65 @@ body {
 }
 .name {
   font-size: 20px;
+}
+#secret-word {
+  padding-top: 40px;
+  text-align: left;
+}
+.letter {
+  border: 3px solid white;
+  background: #3f44ff;
+  font-size: 30px;
+  margin: 0 4px;
+  height: 40px;
+  width: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 35px;
+}
+.info {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  text-align: left;
+}
+.units {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+input {
+  font-size: 20px;
+  padding: 5px;
+  vertical-align: middle;
+  width: 20px;
+  background: transparent;
+  border: none;
+  color: white;
+  border: 1px solid white;
+}
+::placeholder {
+  color: white;
+}
+button {
+  border: 1px solid white;
+  padding: 9px;
+  vertical-align: middle;
+  color: white;
+  background: transparent;
+}
+button:disabled,
+button[disabled] {
+  color: transparent;
+  border: none;
+}
+.wrong {
+  border-radius: 8px;
+  padding: 10px;
+  background: linear-gradient(
+    200deg,
+    #f506ff -3.69%,
+    #8310fe 50.31%,
+    #3f44ff 66.14%,
+    #04cafb 93.89%
+  );
 }

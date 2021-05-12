@@ -6,7 +6,7 @@ export class Unit {
     this.ava = data.ava;
     this.count = 0;
 
-    const right = document.querySelector('.right');
+    const right = document.querySelector('.units');
 
     const group = document.createElement('div');
     group.className = 'group';

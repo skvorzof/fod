@@ -1,5 +1,5 @@
 export const audio = document.createElement('audio');
-export const clips = ['roll', 'zero', 'b', 'priz', 'x'];
+export const clips = ['roll', 'zero', 'b', 'priz', 'x', 'ura', 'yes', 'no'];
 
 export const loadClip = (clip) => {
   audio.src = `./src/media/${clip}.mp3`;

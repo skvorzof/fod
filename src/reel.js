@@ -1,5 +1,6 @@
 import { loadClip, playClip, stopClip, clips } from './player';
 import { Unit } from './Unit';
+import { isWordExist } from './words';
 
 const unit1 = new Unit({
   id: 1,
@@ -40,10 +41,12 @@ const units = [unit1, unit2, unit3];
 let index = 0;
 let curUnit = units[index];
 
-const nextUnit = () => {
+export const nextUnit = () => {
+  units[index].removeActive();
   index++;
   if (index > units.length - 1) index = 0;
   curUnit = units[index];
+  curUnit.setActive();
 };
 
 const check = (num) => {
@@ -51,34 +54,33 @@ const check = (num) => {
     case 0:
       loadClip(clips[1]);
       playClip();
-      curUnit.removeActive();
       nextUnit();
       break;
     case 1: //Банкрот
       loadClip(clips[2]);
       playClip();
       curUnit.counter(num);
-      curUnit.removeActive();
       nextUnit();
       break;
     case 2: //x2
       loadClip(clips[4]);
       playClip();
-      curUnit.counter(num);
+      isWordExist(curUnit, num);
       break;
     case 3: // Приз
       loadClip(clips[3]);
       playClip();
+      isWordExist(curUnit, num);
       break;
     default:
-      curUnit.counter(num);
+      isWordExist(curUnit, num);
       stopClip();
   }
 };
 
 let oneClick = true; // Запрет на повторный запуск барабана
 let num = 0;
-const anim = timer({
+const animate = timer({
   from: 0,
   to: 360 * 3 + 120,
   duration: 2 * 5000,
@@ -120,7 +122,7 @@ function rotateReel() {
     650,
     900,
   ][n];
-  anim.play(360 * 3 + n * 15); //угол поворота
+  animate.play(360 * 3 + n * 15); //угол поворота
 }
 
 div.addEventListener('click', () => {

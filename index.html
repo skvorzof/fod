@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -11,7 +11,28 @@
       <div class="left">
         <div id="ring"></div>
       </div>
-      <div class="right"></div>
+      <div class="right">
+        <div class="word">
+          <div id="secret-word"></div>
+          <div class="info">
+            <h3 class="desc">Загаданное слово:</h3>
+            <span
+              >Абстрактный образ, воплощающий множество сходных форм одного и
+              того же объекта.</span
+            >
+          </div>
+          <div class="inp-group">
+            <input type="text" placeholder="..." />
+            <button>Назовите букву</button>
+          </div>
+        </div>
+        <div class="units"></div>
+        <div class="wrong_wrap">
+          <h3 class="desc">Этих букв нет:</h3>
+
+          <div class="wrong"></div>
+        </div>
+      </div>
     </div>
     <script type="module" src="/main.js"></script>
   </body>
