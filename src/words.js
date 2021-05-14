@@ -1,15 +1,35 @@
 import { nextUnit } from './reel';
 import { loadClip, playClip, clips } from './player';
+import { words } from './questions';
 
-const words = ['прототип'];
+let currentWord = '';
+let question = '';
+let count = 0;
+
+function getQuestionId() {
+  count++;
+  if (count >= words.length) count = 0;
+  return count;
+}
+
+const quest = document.querySelector('.question');
+const getQuestion = (id) => {
+  words
+    .filter((el) => el.id === id)
+    .forEach((el) => {
+      currentWord = el.word.toLocaleLowerCase();
+      question = el.question;
+    });
+  quest.textContent = question;
+};
+
+getQuestion(getQuestionId());
 
 const wordElement = document.querySelector('#secret-word');
 const inp = document.querySelector('input');
 const btn = document.querySelector('button');
 const wrong = document.querySelector('.wrong');
-const info = document.querySelector('.info');
-
-const currentWord = words[0];
+const gameInfo = document.querySelector('.gameInfo');
 
 const correctLetters = [];
 const wrongLetters = [];
@@ -30,8 +50,18 @@ function displayWord() {
 
   const innerWord = wordElement.innerText.replace(/[ \n]/g, '');
   if (innerWord === currentWord) {
-    info.textContent = 'Победа Ура!!!';
+    gameInfo.style.display = 'block';
+    gameInfo.textContent = 'Победа Ура!!!';
+    setTimeout(() => {
+      gameInfo.style.display = 'none';
+      gameInfo.textContent = '';
+    }, 5000);
     wins = true;
+
+    setTimeout(() => {
+      getQuestion(getQuestionId());
+      newGame();
+    }, 4000);
   }
 }
 
@@ -75,7 +105,18 @@ export const sendWord = (w) => {
   inp.value = '';
 };
 
-btn.addEventListener('click', () => sendWord(inp.value));
+function newGame() {
+  wins = false;
+
+  correctLetters.splice(0);
+  wrongLetters.splice(0);
+
+  displayWord();
+
+  updateWrongLettersEl();
+}
+
+btn.addEventListener('click', () => sendWord(inp.value.toLowerCase()));
 
 // Распознование речи
 window.SpeechRecognition =
