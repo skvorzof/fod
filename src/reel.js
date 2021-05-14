@@ -70,7 +70,7 @@ const check = (num) => {
     case 3: // Приз
       loadClip(clips[3]);
       playClip();
-      isWordExist(curUnit, num);
+      isWordExist(curUnit, 0);
       break;
     default:
       isWordExist(curUnit, num);
